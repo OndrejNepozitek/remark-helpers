@@ -1,13 +1,20 @@
 const visit = require('unist-util-visit')
 
-module.exports = () => tree => {
-  visit(tree, 'heading', node => {
-    if (node.depth !== 1) {
-      return;
-    }
+const defaultOptions = {
+  nodeType: 'html',
+  replaceImages: true,
+  imageComponent: 'Image',
+};
 
-    visit(node, 'text', textNode => {
-      textNode.value = 'BREAKING ' + textNode.value;
+module.exports = function attacher(options) {
+  options = { ...defaultOptions, ...options };
+
+  function transformer(tree) {
+    visit(tree, 'image', node => {
+      node.type = options.nodeType;
+      node.value = `<${options.imageComponent} src="${node.url}" caption="${node.alt}" />`
     })
-  })
-}
+  }
+
+  return transformer;
+} 

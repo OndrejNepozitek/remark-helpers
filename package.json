@@ -1,5 +1,5 @@
 {
-  "name": "remark-helpers",
+  "name": "@ondrej-nepozitek/remark-helpers",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/OndrejNepozitek/remark-helpers.git"
   },
-  "author": "",
+  "author": "OndrejNepozitek",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/OndrejNepozitek/remark-helpers/issues"

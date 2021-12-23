@@ -1,14 +1,14 @@
-const fs = require('fs')
-const remark = require('remark')
-const plugin = require('.')
-const doc = fs.readFileSync('fixture.md', 'utf8')
+const remark = require('remark');
+const plugin = require('.');
 
-test('adds BREAKING to h1s', () => {
+test('replaces images with a custom tag', () => {
+  const doc = "![alt text](img.png)";
   const result = remark()
-    .use(plugin)
-    .processSync(doc)
+    .use(plugin, { 
+      nodeType: 'html',
+      imageComponent: 'Image',
+    })
+    .processSync(doc);
 
-  expect(result.contents).toContain('# BREAKING Hello, world!')
-
-  console.log(result.contents)
+  expect(result.contents).toContain('<Image src="img.png" caption="alt text" />');
 })
